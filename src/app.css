@@ -1,4 +1,116 @@
-path{
-    stroke: #000000;
+/* path,circle{
+    stroke: white;
     fill: none;
 }
+circle{
+    stroke: white;
+    fill: white;
+} */
+body{
+    background-color: black;
+    color: white;
+}
+.link{
+    fill-opacity: 0;
+    stroke-width: 1;
+    stroke-dasharray: 250px;
+    stroke-dashoffset: 300px;
+    animation: draw 1s  linear;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+.field-tick-outer path{
+    opacity: 0;
+    animation: disp .9s linear ;
+    animation-fill-mode: forwards;
+}
+.field-tick-inner:hover{
+    cursor: pointer;
+}
+
+.imagecontainer{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: red;
+}
+.text-outer{
+    opacity: 0;
+    animation: textopacity 1s linear;
+    animation-fill-mode: forwards;
+}
+
+
+/* for dom */
+.masterContainer{
+    display: flex;
+}
+
+.masterContainer > *{
+    flex: 1;
+}
+.svgMasterContainer{
+}
+.svgContainer{
+    width: 450px;
+    height: 500px;
+    text-align: center;
+    position: relative;
+}
+img{
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    border-radius: 50%;
+}
+.centerPic{
+    position: absolute;
+
+    top: 40%;
+    left: 39%;
+    border-radius: 50%;
+}
+
+
+
+@keyframes draw {
+    0% {
+        stroke-dashoffset: 200;
+    }
+    50%{
+        
+        stroke-dashoffset: 100;
+        
+    }
+
+100%{
+        stroke-dashoffset: 0;
+    
+    }
+  }
+@keyframes disp {
+    0% {
+        opacity: 0;
+    }
+  90%{
+    opacity: 0;
+  }
+
+100%{
+       opacity: 1;
+    
+    }
+  }
+@keyframes textopacity {
+    0% {
+        opacity: 0;
+    }
+  90%{
+    opacity: 0;
+  }
+
+100%{
+       opacity: 1;
+    
+    }
+  }

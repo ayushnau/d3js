@@ -1,0 +1,24 @@
+{
+    "nodes": [
+      {"id": "1", "group": 1,"information":{"img":"https://picsum.photos/100/100","heading":"lorempiscum1","about":"this is about this of this particular"}},
+      {"id": "2", "group": 1,"information":{"img":"https://picsum.photos/100/100","heading":"lorempiscum2","about":"this is about this of this particular"}},
+      {"id": "3", "group": 1,"information":{"img":"https://picsum.photos/100/100","heading":"lorempiscum3","about":"this is about this of this particular"}},
+      {"id": "4", "group": 1,"information":{"img":"https://picsum.photos/100/100","heading":"lorempiscum4","about":"this is about this of this particular"}},
+      {"id": "5", "group": 1,"information":{"img":"https://picsum.photos/100/100","heading":"lorempiscum5","about":"this is about this of this particular"}},
+      {"id": "a", "group": 2,"information":{"img":"https://picsum.photos/100/100","heading":"lorempiscuma","about":"this is about this of this particular"}},
+      {"id": "b", "group": 2,"information":{"img":"https://picsum.photos/100/100","heading":"lorempiscumb","about":"this is about this of this particular"}},
+      {"id": "c", "group": 2,"information":{"img":"https://picsum.photos/100/100","heading":"lorempiscumc","about":"this is about this of this particular"}}
+    ],
+
+    "links":[
+        {"source":{"id":"1","x":"","y":""},"target":{"id":"a","x":"","y":""}},
+        {"source":{"id":"1","x":"","y":""},"target":{"id":"b","x":"","y":""}},
+        {"source":{"id":"2","x":"","y":""},"target":{"id":"b","x":"","y":""}},
+        {"source":{"id":"3","x":"","y":""},"target":{"id":"a","x":"","y":""}},
+        {"source":{"id":"4","x":"","y":""},"target":{"id":"c","x":"","y":""}},
+        {"source":{"id":"5","x":"","y":""},"target":{"id":"a","x":"","y":""}},
+        {"source":{"id":"5","x":"","y":""},"target":{"id":"b","x":"","y":""}},
+        {"source":{"id":"5","x":"","y":""},"target":{"id":"c","x":"","y":""}}
+    ]
+  }
+  
