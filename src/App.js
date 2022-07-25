@@ -3,6 +3,7 @@ import './app.css'
 import * as d3 from 'd3'
 import sampledata from './sampledata.json'
 import sampledata2 from './sampledata2.json'
+import { transition } from 'd3'
 
 
 
@@ -14,10 +15,10 @@ const App = () => {
   useEffect(() => {
     //initilization
     let radius = 300;
-    let width = 450;
+    let width = 550;
     let height = 500;
-    const rad1 = .2;
-    const rad2 = .6;
+    const rad1 = .2493;
+    const rad2 = .68557;
 
   let svg = d3.select(".svgContainer").append('svg')
   .attr("width",width).attr('height',height)
@@ -61,7 +62,7 @@ const App = () => {
         });
 
 
-        //  //creating a circle to be used in bigcircle
+        //  //creating a circle to be used in center bigcircle
         //   var defs = svg.append('svg:defs');
         //   defs.append('svg:pattern')
         //     .attr('id', 'tile-ww')
@@ -78,7 +79,7 @@ const App = () => {
     
     
     
-          //appending the bigger circles
+          //appending the two big circles
           const bigCircle = field.append("circle")
             .attr("fill", "none")
             .attr("stroke", (d) => { if (d.radius === rad1 * radius) return "blue"; else { return "white" } })
@@ -87,7 +88,7 @@ const App = () => {
             .style('margin', '40')
             .style('fill', (d) => { if (d.radius === rad1 * radius) return "url(#tile-ww)" })
             .attr("stroke-dasharray", (i) => {
-              if (i.radius === 60) {
+              if (i.radius === radius * rad1) {
                 return ("19")
               }
               else {
@@ -104,6 +105,7 @@ const App = () => {
           })
           .join("a") 
           .attr("transform", (d, i) => {
+            // console.log(d)
             const angle = i / d.field.length * 2 * (22 / 7) - (22 / 7) / 2;
             const a = Math.cos(angle) * d.field.radius;
             const b = Math.sin(angle) * d.field.radius;
@@ -112,7 +114,7 @@ const App = () => {
             return `translate(${a},${b})`;
           });
     
-        console.log(linkdata)
+        // console.log(linkdata)
         
         //adding x and y coordinated to links;
         const a = linkdata.map(item => {
@@ -128,7 +130,7 @@ const App = () => {
             return
           })
         })
-        console.log(links)
+        // console.log(links)
         //calculating the path coordinates
     
         var link = d3.linkHorizontal()
@@ -141,8 +143,12 @@ const App = () => {
             return [d.target.x, d.target.y]
           })
           ;
+
+
+
+          
         //adding the path
-          console.log(d3.select(`[id="g1"]`))
+          // console.log(d3.select(`[id="g1"]`))
         const path = d3.select('#g1').selectAll("path")
           .data(links)
           .join("path")
@@ -152,9 +158,13 @@ const App = () => {
             return i.target.id
           })
           .attr('stroke', "rgb(211, 218, 222)")
-          .classed("link", true)
+          .classed("link", true).on('mouseover',(e)=>{
+            d3.select(e.target).attr('stroke','blue')
+          }).on('mouseout',(e)=>{
+            d3.select(e.target).attr('stroke','white')
+          })
     
-          console.log(path)
+          // console.log(path)
     
     
          
@@ -162,46 +172,100 @@ const App = () => {
     
           //adding text
     
+          // const text = field.selectAll("text")
+          //   .data(d => {
+          //     return d.node.map(t => ({ field: d }));
+          //   })
+          //   .join('text')
+          //   .text((d, i) => {
+          //     return d.field.node[i].id
+          //   }).attr("fill", 'white')
+          //   .attr("class", (d)=>{ 
+    
+          //     if(d.field.radius === rad1* radius)
+          //     return "text-inner"
+            
+          //     else {return "text-outer"}
+          //   })
+             
+            
+          //   .attr("transform", (d, i) => {
+          //     // console.log(d,i)
+          //     const angle = i / d.field.length * 2 * Math.PI - Math.PI / 2;
+          //     if (d.field.radius === rad2 * radius) {
+          //       const a = Math.cos(angle) * (d.field.radius + 20);
+          //       const b = Math.sin(angle) * (d.field.radius + 20);
+          //       return `translate(${a},${b}) rotate(${angle * 57.29})`;
+          //     }
+    
+    
+          //     else {
+          //       const a = Math.cos(angle) * (d.field.radius + 30);
+          //       const b = Math.sin(angle) * (d.field.radius + 30);
+          //       return `translate(${a},${b})`
+          //     }
+          //   })
+    
           const text = field.selectAll("text")
             .data(d => {
               return d.node.map(t => ({ field: d }));
             })
-            .join('text')
-            .text((d, i) => {
-              return d.field.node[i].id
-            }).attr("stroke", 'white')
+            .join('foreignObject')
+            .attr("width", 50)
+            .attr("height", 50)
             .attr("class", (d)=>{ 
-    
               if(d.field.radius === rad1* radius)
               return "text-inner"
-            
+              
               else {return "text-outer"}
             })
-             
+            
             
             .attr("transform", (d, i) => {
               // console.log(d,i)
               const angle = i / d.field.length * 2 * Math.PI - Math.PI / 2;
               if (d.field.radius === rad2 * radius) {
-                const a = Math.cos(angle) * (d.field.radius + 20);
-                const b = Math.sin(angle) * (d.field.radius + 20);
+                const a = Math.cos(angle) * (d.field.radius );
+                const b = Math.sin(angle) * (d.field.radius );
                 return `translate(${a},${b}) rotate(${angle * 57.29})`;
               }
     
-    
+              
               else {
-                const a = Math.cos(angle) * (d.field.radius + 30);
-                const b = Math.sin(angle) * (d.field.radius + 30);
+                console.log(angle*57.296)
+                let a;
+                if(angle*57.296 >= 100 && angle*57.296 <= 250){
+                   a = Math.cos(angle) * (d.field.radius +90);
+                }
+                else{
+                   a = Math.cos(angle) * (d.field.radius +40);
+                }
+                const b = Math.sin(angle) * (d.field.radius+50 );
                 return `translate(${a},${b})`
               }
-    
-    
-    
             })
+            .append("xhtml:div")
+            .classed('text',true) 
+            .attr('id',(d,i)=>{
+              console.log(d,i);
+              return d.field.node[i].id
+            })
+    .style('font-size',(d,i)=>{if(d.field.node[0].group === 1){return '8px'}else{return '15px'}})
+    .html((d,i)=>{
+      let retelement;
+      sampledata2.nodes.forEach((item,index) =>{
+        // console.log(item)  
+        // console.log(item,index,d.field.node[i])
+        if(item.id === d.field.node[i].id){
+          console.log(item.information.heading);
+          retelement = item.information.heading;
+           return item.information.heading
+          }
+      })
+      return retelement
     
-    
-    
-    
+    })
+  
     
     
     
@@ -246,7 +310,7 @@ const App = () => {
             .attr("d", (i) => {
               if (i.field.radius === rad2 * radius)
                 return "M-5.5,-8.5 h6 q6,0 6,6 v10 q0,1 -1,1 h-11 q-1,0 -1,-1 v-15 q0,-1 1,-1 Z"
-              else { return "M 0, 0 m -9, 0 a 9,9 0 1,0 18,0 a 9,9 0 1,0 -18,0" }
+              else { return "M 0, 0 m -14, 0 a 14,14 0 1,0 28,0 a 14,14 0 1,0 -28,0" }
             })
             .attr('r', 9)
             
@@ -254,25 +318,44 @@ const App = () => {
             .attr("stroke", "rgb(211, 218, 222)")
             .on('mouseover',(e)=>{
               console.log(e)
+              const currentElement = d3.select(e.target);
               const currentId = e.target.parentElement.id;
               let group = nodes.filter(item => item.id === currentId)[0].group;
               if(group ===2){
-                d3.select(e.target).transition().duration(10).attr("d", "M 0, 0 m -11, 0 a 11,11 0 1,0 22,0 a 11,11 0 1,0 -22,0")
+                console.log('it ran')
+                currentElement.transition().attr("d", "M 0, 0 m -15, 0 a 15,15 0 1,0 30,0 a 15,15 0 1,0 -30,0").transition().attr("d", "M 0, 0 m -14, 0 a 14,14 0 1,0 28,0 a 14,14 0 1,0 -28,0")
               }
+              else{
+                currentElement.transition().attr("d", "M -6.6 -10.2 h 7.2 q 7.2 0 7.2 7.2 v 12 q 0 1.2 -1.2 1.2 h -13.2 q -1.2 0 -1.2 -1.2 v -18 q 0 -1.2 1.2 -1.2 Z").transition().attr("d", "M-5.5,-8.5 h6 q6,0 6,6 v10 q0,1 -1,1 h-11 q-1,0 -1,-1 v-15 q0,-1 1,-1 Z")
+
+              }
+              currentElement.attr('fill','blue')
+              
+              
             })
             .on('mouseout',(e)=>{
+              const currentElement = d3.select(e.target);
               console.log(e)
               const currentId = e.target.parentElement.id;
               let group = nodes.filter(item => item.id === currentId)[0].group;
               if(group ===2){
-                d3.select(e.target).transition().duration(10).attr("d", "M 0, 0 m -9, 0 a 9,9 0 1,0 18,0 a 9,9 0 1,0 -18,0")
+                currentElement.transition().duration(10).attr("d", "M 0, 0 m -14, 0 a 14,14 0 1,0 28,0 a 14,14 0 1,0 -28,0")
+              }
+
+              if(currentElement.attr('class') === null){
+                currentElement.attr('fill','white')
               }
             })
             .on('click', (e) => {
+              const currentElement = d3.select(e.target);
               const currentId = e.target.parentElement.id;
               const parentOfId = [];
               const newLinks = [];
               let newNode = [];
+
+              d3.selectAll('*').classed('clicked',false)
+              //adding click event for the element true for handling clash bewteen mouseout/click event
+              d3.select(e.target).classed('clicked',true)
 
               //adding the info to the useeffect variable
               console.log(nodes)
@@ -325,35 +408,34 @@ const App = () => {
               }
     
               else if (group === 2) {
-               
-                //removing any blue color before updating
-                nodes.map(item => { 
-                  d3.select(`[id="${item.id}"]`)._groups[0][0].children[0].setAttribute('fill','white')
-                })
-                d3.selectAll('path').attr('stroke', 'white')
                 
-                d3.selectAll(`[id="${currentId}"]`)._groups[0][0].children[0].setAttribute('fill', 'blue')
-                let a = d3.selectAll(`.${currentId}`).attr('stroke', 'blue')
+                //removing any blue color before updating
+                d3.selectAll('path:not(.clicked)').attr('fill','white')
+               
+                //removing the blue color from path from updating 
+                d3.selectAll('path').transition().attr('stroke', 'white')
+                
+
+                //making smaller circle node blue 
+                d3.selectAll(`[id="${currentId}"]`).select('path').transition().attr('fill','blue')
+                
+
+                //for making path blue
+                let a = d3.selectAll(`.${currentId}`).transition().attr('stroke', 'blue') 
                
                 //for making outer nodes blue on click
                 links.forEach(item => {
                   
                   if (item.target.id === currentId) {
                     const targetId = item.source.id;
-                    const a = d3.selectAll(`[id="${targetId}"]`)._groups[0][0];
-                    a.children[0].setAttribute('fill', 'blue')
+                  d3.selectAll(`[id="${targetId}"]`).transition().selectAll('path').attr('fill','blue')
+                   
                   }
      
                 
                 });}
     
             })
-    
-    
-           
-    
-
- 
 
     }
      finalproduct(sampledata);
@@ -363,9 +445,7 @@ const App = () => {
     
 
   }, [])
-  useEffect(() => {
-    console.log(data)
-  }, [data])
+ 
   
 
 
@@ -376,7 +456,7 @@ const App = () => {
 
           <div className="svgContainer">
             <div className="centerPic">
-            <img src ="https://picsum.photos/100/100" alt="" />
+            <img src ="https://picsum.photos/120/120" alt="" />
           </div>
           </div>
           

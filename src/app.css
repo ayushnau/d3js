@@ -10,11 +10,25 @@ body{
     background-color: black;
     color: white;
 }
+div{
+    color: white;
+}
+div.text{
+    text-align: start; 
+    width: 10px;
+}
+.text-outer div{
+    margin-left: 20px;
+
+}
+.text-inner div{
+    
+}
 .link{
     fill-opacity: 0;
-    stroke-width: 1;
-    stroke-dasharray: 250px;
-    stroke-dashoffset: 300px;
+    stroke-width: .125vmin;
+    stroke-dasharray: 300px;
+    stroke-dashoffset: 900px;
     animation: draw 1s  linear;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
@@ -52,7 +66,7 @@ body{
 .svgMasterContainer{
 }
 .svgContainer{
-    width: 450px;
+    width: 550px;
     height: 500px;
     text-align: center;
     position: relative;
@@ -66,7 +80,7 @@ img{
 .centerPic{
     position: absolute;
 
-    top: 40%;
+    top: 38%;
     left: 39%;
     border-radius: 50%;
 }
