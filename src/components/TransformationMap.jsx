@@ -23,6 +23,8 @@ const TransformationMap = (props) => {
     const strokeColor = 'rgb(211, 218, 222)';
     const hightlightColor = 'blue';
     const fillColor = 'white';
+    let centerImageWidth;
+    let centerImageHeight;
     let currentNodeInfo =[{item:{"id": "1", "group": 1,"information":{"img":"https://picsum.photos/100/100","heading":"lorem piscum1","about":"this is about this of this particular"}}}];
 
     let svg = d3.select(".svgContainer").append('svg')
@@ -56,7 +58,8 @@ const TransformationMap = (props) => {
         { radius: rad1 * radius, node: node1, length: node1.length },
         { radius: rad2 * radius, node: node2, length: node2.length }
       ]
-
+       
+    
 
       let idcount = 0;
 
@@ -72,7 +75,7 @@ const TransformationMap = (props) => {
         });
 
         
-
+        // debugger;
       //appending the two big circles
       const bigCircle = field.append("circle")
         .attr("fill", "none")
@@ -91,7 +94,7 @@ const TransformationMap = (props) => {
 
         });
 
-
+        // debugger;
 
       //getting the position for the pathdata to be used for appending path
       field.selectAll("a")
@@ -162,9 +165,15 @@ const TransformationMap = (props) => {
 
 
       //adding center image in the svg
+      centerImageWidth =( rad1 * radius -20)*2
+      centerImageHeight = (rad1 * radius -20)*2
+      
         console.log(currentNodeInfo[0].item.information.img)
-      d3.select('#g1').append('foreignObject').classed('imageContainer', true).attr("width", 110)
-        .attr("height", 110).attr('transform', 'translate(-55,-55 )').style('position','relative')
+      d3.select('#g1').append('foreignObject').classed('imageContainer', true).attr("width", centerImageWidth)
+        .attr("height", centerImageHeight)
+        .attr('x' , -centerImageWidth/2)
+        .attr('y' , -centerImageHeight/2)
+        .style('position','relative')
         .append('xhtml:div').classed('centerImageholder', true).append('xhtml:img')
         .attr('src',`${currentNodeInfo[0].item.information.img}`)
         
@@ -173,12 +182,11 @@ const TransformationMap = (props) => {
 
       //adding animation to center image
       d3.select('.imageContainer').select('.centerImageholder')
-                                  .style('width', '110px')
-                                  .style('height', '110px')
+                                  .style('width', centerImageWidth)
+                                  .style('height', centerImageHeight)
       .transition().duration(1)      .style('transform','scale(0)')
       .transition().duration(1000).style('transform','scale(1)')
 
-        d3.select('.imageContainer').append('xhtml:div').classed('textHolder',true).html(`${currentNodeInfo[0].item.information.heading}`)
 
 
     

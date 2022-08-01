@@ -27,8 +27,8 @@ div.text{
 .link{
     fill-opacity: 0;
     stroke-width: .125vmin;
-    stroke-dasharray: 250px;
-    stroke-dashoffset: 400px;
+    stroke-dasharray: 300px;
+    stroke-dashoffset: 600px;
     animation: draw 1s  linear ;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
@@ -110,22 +110,22 @@ img{
     0% {
         stroke-dashoffset: 250;
     }
-    10%{
-        
-        stroke-dashoffset: 300;
-        
-    }
+    
     50%{
         
         stroke-dashoffset: 400;
     }
     75%{
         
-        stroke-dashoffset: 450;
+        stroke-dashoffset: 500;
+    }
+    90%{
+        
+        stroke-dashoffset: 550;
     }
 
 100%{
-        stroke-dashoffset: 500;
+        stroke-dashoffset: 600;
     
     }
   }
