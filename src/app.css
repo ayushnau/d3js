@@ -7,13 +7,49 @@ circle{
     fill: white;
 } */
 body{
-    background-color: rgb(247,247,247);
-    background-color: black; 
+    background-color: rgb(245,248,249);
+    /* background-color: black;  */
     color: #4a4b63;
    
 }
+div{
+    text-align: center;
+}
+.svgContainer{
+    text-align: initial;    
+}
 
-div.text{
+#centerImage div{
+    color: black;
+}
+.texthover:hover{
+    transform: scale(1.1);
+}
+.master{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+}
+.master > div{
+    border: 3px solid red;
+}
+.cardmaster{
+    width: 400px;
+}
+.svgContainer{
+    width: 100%;
+}
+@media (min-width : 900px){
+    .master{
+        flex-direction: initial;
+    }
+    .svgContainer{
+        width: 50%;
+    }
+}
+
+/* div.text{
     text-align: start; 
     width: 10px;
 }
@@ -66,7 +102,7 @@ div.text{
 
 
 /* for dom */
-.masterContainer{
+/* .masterContainer{
     display: flex;
 }
 
@@ -83,9 +119,6 @@ div.text{
 }
 .centerImageholder{
     border-radius: 50%;
-    /* background: green; */
-   
-
 }
 img{
     width: 100%;
@@ -102,56 +135,5 @@ img{
 }
 .svgCard{
     font-size: 3em;
-}
+}  */
 
-
-
-@keyframes draw {
-    0% {
-        stroke-dashoffset: 250;
-    }
-    
-    50%{
-        
-        stroke-dashoffset: 400;
-    }
-    75%{
-        
-        stroke-dashoffset: 500;
-    }
-    90%{
-        
-        stroke-dashoffset: 550;
-    }
-
-100%{
-        stroke-dashoffset: 600;
-    
-    }
-  }
-@keyframes disp {
-    0% {
-        opacity: 0;
-    }
-  90%{
-    opacity: 0;
-  }
-
-100%{
-       opacity: 1;
-    
-    }
-  }
-@keyframes textopacity {
-    0% {
-        opacity: 0;
-    }
-  90%{
-    opacity: 0;
-  }
-
-100%{
-       opacity: 1;
-    
-    }
-  }

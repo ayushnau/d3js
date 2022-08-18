@@ -20,8 +20,8 @@ const TransformationMap = (props) => {
     const rad1 = .2493;
     const rad2 = .68557;
 
-    const strokeColor = 'rgb(211, 218, 222)';
     const hightlightColor = 'blue';
+    const strokeColor = 'rgb(211, 218, 222)';
     const fillColor = 'white';
     let centerImageWidth;
     let centerImageHeight;
